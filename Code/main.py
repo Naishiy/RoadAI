@@ -4,6 +4,22 @@ import cv2
 
 model = YOLO('yolov8s.pt')
 
+file_data = """
+path: pothole_dataset_v8/
+train: 'train/images'
+val: 'valid/images'
+
+# class names
+names:
+  0: 'pothole'
+
+"""
+
+filename = "pothole_v8.yaml"
+myfile = open(filename, 'w')
+myfile.write(file_data)
+myfile.close()
+
 # Запуск обучения
 results = model.train(
     data='pothole_v8.yaml',
