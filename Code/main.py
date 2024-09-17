@@ -24,12 +24,12 @@ myfile.close()
 results = model.train(
     data='pothole_v8.yaml',
     imgsz=640,
-    epochs=100,
+    epochs=1,
     batch=16,
     name='yolov8n_custom')
 
 # Тест
-path = 'C:/Python/datasets/pothole_dataset_v8/valid/images/img-61_jpg.rf.a90cbd2da26633925c4bc0eb783ba58f.jpg'
+path = 'C:/Users/NIKITA/Documents/RoadAI/Easy1.jpg'
 results = model([path])
 
 # OpenCV для визуализации
