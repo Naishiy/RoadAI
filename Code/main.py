@@ -1,0 +1,35 @@
+from ultralytics import YOLO
+import cv2
+
+
+model = YOLO('yolov8s.pt')
+
+# Запуск обучения
+results = model.train(
+    data='pothole_v8.yaml',
+    imgsz=640,
+    epochs=100,
+    batch=16,
+    name='yolov8n_custom')
+
+# Тест
+path = 'C:/Python/datasets/pothole_dataset_v8/valid/images/img-61_jpg.rf.a90cbd2da26633925c4bc0eb783ba58f.jpg'
+results = model([path])
+
+# OpenCV для визуализации
+img = cv2.imread(path)
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+for r in results[0]:
+    for box in r.boxes:
+        b = box.xyxy[0]
+        c = box.cls
+        start_point = (int(b[0]), int(b[1]))
+        end_point = (int(b[2]), int(b[3]))
+        color = (255, 0, 0)
+        thickness = 2
+
+        image = cv2.rectangle(img, start_point, end_point, color, thickness)
+        print(b)
+
+cv2.imshow("frame", image)
