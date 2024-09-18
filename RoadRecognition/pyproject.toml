@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "roadrecognition"
+version = "0.1.0"
+description = ""
+authors = ["Ivan Lukovkin <121473397+iamlukovkin@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+opencv-python = "^4.10.0.84"
+pyqt5 = "^5.15.11"
+google = "^3.0.0"
+moviepy = "^1.0.3"
+pandas = "^2.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
