@@ -3,10 +3,9 @@ from operator import truediv
 from ultralytics import YOLO
 import cv2
 
+
 def Learn():
-
     model = YOLO('yolov8s.pt')
-
     file_data = """
     path: pothole_dataset_v8/
     train: 'train/images'
@@ -15,39 +14,33 @@ def Learn():
     # class names
     names:
       0: 'pothole'
-    
     """
-
     filename = "pothole_v8.yaml"
-    myfile = open(filename, 'w')
-    myfile.write(file_data)
-    myfile.close()
-
-    # Запуск обучения
+    my_file = open(filename, 'w')
+    my_file.write(file_data)
+    my_file.close()
     results = model.train(
         data='pothole_v8.yaml',
         imgsz=640,
         epochs=1,
         batch=16,
         name='yolov8n_custom')
-    return 0
+    return results
 
-def Test(path):
-    # Тест
 
+def launch_machine(source_path: str, destination_path: str):
     model = YOLO('yolov8s.pt')
     results = model.predict(
-        source=path,
-        show = True,
+        source=source_path,
+        show=True,
         imgsz=100,
-        hide_labels = True,
-        save = True,
-        name = 'C:/Users/krovl/PycharmProjects/TransAI/TransAI/results',
-        conf = 0.1,
+        hide_labels=True,
+        save=True,
+        name=destination_path,
+        conf=0.1,
     )
 
-    # OpenCV для визуализации
-    img = cv2.imread(path)
+    img = cv2.imread(source_path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     for r in results[0]:
@@ -58,7 +51,6 @@ def Test(path):
             end_point = (int(b[2]), int(b[3]))
             color = (255, 0, 0)
             thickness = 2
-
             image = cv2.rectangle(img, start_point, end_point, color, thickness)
             print(b)
     cv2.imshow("frame", image)
