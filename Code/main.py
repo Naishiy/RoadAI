@@ -29,7 +29,8 @@ def Learn():
         imgsz=640,
         epochs=100,
         batch=16,
-        name='yolov8n_custom')
+        name='yolov8n_custom',
+        device = 'gpu',)
     return 0
 
 def Test(path):
