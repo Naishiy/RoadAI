@@ -1,5 +1,5 @@
-from exceptions import CameraNotFoundException
-from models import Capture
+from .exceptions import CameraNotFoundException
+from .models import Capture
 
 import numpy as np
 import cv2
@@ -15,9 +15,7 @@ class RoadRecognition:
     def execute_frame(cls, success: bool, frame: cv2.typing.MatLike) -> bool:
         if not success:
             return False
-        served_frame: cv2.typing.MatLike = cls.frame_processor(frame)
-        # RoadRecognition.recognite(frame)
-        cv2.imshow('Video', served_frame)
+        cv2.imshow('Video', frame)
 
     @classmethod
     def prepare_capture(cls, camera_index: int) -> cv2.VideoCapture:

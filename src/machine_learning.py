@@ -1,3 +1,6 @@
+import datetime
+import os
+
 from ultralytics import YOLO
 import cv2
 
@@ -29,19 +32,17 @@ class MachineLearning:
         return results
 
     @classmethod
-    def launch(cls, source_path: str, destination_path: str):
+    def launch(cls, frame: cv2.typing.MatLike):
         model = YOLO('yolov8s.pt')
-        results = model.predict(
-            source=source_path, show=True, imgsz=100,
-            hide_labels=True, save=True, name=destination_path, conf=0.1,
-        )
-        img = cv2.imread(source_path)
+        path: str = os.getcwd() + "/temp/" + datetime.datetime.now().__str__() + ".jpg"
+        cv2.imwrite(path, frame)
+        results = model.predict(source=path, show=True, imgsz=100, show_labels=True, save=True, conf=0.1,)
+        img = cv2.imread(path)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         image: cv2.UMat = cv2.UMat()
         for r in results[0]:
             for box in r.boxes:
                 b = box.xyxy[0]
-                # c = box.cls
                 start_point = (int(b[0]), int(b[1]))
                 end_point = (int(b[2]), int(b[3]))
                 color = (255, 0, 0)
