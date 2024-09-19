@@ -42,7 +42,7 @@ def Test(path):
         imgsz=640,
         hide_labels = True,
         save = True,
-        name = 'C:/Users/krovl/PycharmProjects/TransAI/TransAI/results',
+        name = 'results',
         conf = 0.1,
     )
 
@@ -64,5 +64,5 @@ def Test(path):
     cv2.imshow("frame", image)
     return 0
 
-#Test('Easy1.jpg')
+#Test('4Medium.jpg')
 Learn()
