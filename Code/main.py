@@ -39,7 +39,7 @@ def Test(path):
     results = model.predict(
         source=path,
         show = True,
-        imgsz=100,
+        imgsz=640,
         hide_labels = True,
         save = True,
         name = 'C:/Users/krovl/PycharmProjects/TransAI/TransAI/results',
