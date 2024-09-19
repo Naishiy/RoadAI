@@ -27,7 +27,7 @@ def Learn():
     results = model.train(
         data='pothole_v8.yaml',
         imgsz=640,
-        epochs=1,
+        epochs=100,
         batch=16,
         name='yolov8n_custom')
     return 0
